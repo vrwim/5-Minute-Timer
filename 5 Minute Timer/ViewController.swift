@@ -11,8 +11,6 @@ import UserNotifications
 
 class ViewController: UIViewController {
 
-	@IBOutlet weak var label: UILabel!
-
 	let notificationCenter = UNUserNotificationCenter.current()
 
 	override func viewDidLoad() {
@@ -22,7 +20,7 @@ class ViewController: UIViewController {
 			if settings.authorizationStatus == .notDetermined {
 				self.notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { didAllow, error in
 					if !didAllow {
-						self.label.text = "Please allow notifications"
+						print("Please allow notifications")
 						return
 					}
 
@@ -48,7 +46,7 @@ class ViewController: UIViewController {
 
 		notificationCenter.add(request) { error in
 			if let error = error {
-				self.label.text = "Error \(error.localizedDescription)"
+				print("Error \(error.localizedDescription)")
 			}
 		}
 	}
